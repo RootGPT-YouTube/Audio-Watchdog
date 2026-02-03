@@ -107,7 +107,7 @@ Sony Xperia 10 III (lena)
 
 ## Per una installazione rapida:
 ```bash
-curl -sSL (https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/heads/main/install.sh) | bash
+curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/heads/main/install.sh | bash
 ```
 ## Per una sua disinstallazione facilitata:
 ```bash
