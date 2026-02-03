@@ -1,7 +1,7 @@
 # Audio-Watchdog
 Questo progetto fornisce un watchdog automatico per il sottosistema audio di SailfishOS su Sony Xperia 10 III, utile per mitigare il noto problema dell’audio muto durante le chiamate.
 
-# Audio Watchdog per SailfishOS – Xperia 10 III
+## Audio Watchdog per SailfishOS – Xperia 10 III
 
 Questo progetto fornisce un sistema di controllo automatico (“watchdog”) per il sottosistema audio di SailfishOS su **Sony Xperia 10 III**, utile per mitigare il problema dell’audio muto durante le chiamate.
 
@@ -11,7 +11,7 @@ Questa guida descrive **la procedura manuale** per creare il watchdog (punti 1�
 
 ---
 
-## 1. Creare lo script `audio-watchdog`
+### 1. Creare lo script `audio-watchdog`
 
 Creare il file:
 
@@ -52,11 +52,11 @@ Rendere eseguibile:
 ```bash
 sudo chmod +x /usr/local/bin/audio-watchdog
 ```
-## 2. Creare la directory dei servizi utente
+### 2. Creare la directory dei servizi utente
 ```bash
 mkdir -p ~/.config/systemd/user
 ```
-## 3. Creare il servizio systemd utente
+### 3. Creare il servizio systemd utente
 Creare:
 ```bash
 sudo nano ~/.config/systemd/user/audio-watchdog.service
@@ -70,7 +70,7 @@ Description=Audio watchdog per Xperia 10 III
 Type=oneshot
 ExecStart=/usr/local/bin/audio-watchdog
 ```
-## 4. Creare il timer systemd utente
+### 4. Creare il timer systemd utente
 Creare:
 ```bash
 sudo nano ~/.config/systemd/user/audio-watchdog.timer
@@ -103,18 +103,18 @@ sudo tail -f ~/.local/share/audio-watchdog.log
 ```
 è possibile verificarne il corretto funzionamento.
 
-## Compatibilità
+### Compatibilità
 SailfishOS 5.x
 Sony Xperia 10 III (lena)
 
-# Per una installazione rapida:
+## Per una installazione rapida:
 ```bash
 curl -sSL (https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/heads/main/install.sh) | bash
 ```
-# Per una sua disinstallazione facilitata:
+## Per una sua disinstallazione facilitata:
 ```bash
 curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/heads/main/uninstall.sh | bash
 ```
 
 ### Chi vuole provare questo workaround è il benvenuto e sono graditi feedback.
-# Grazie a tutti!
+## Grazie a tutti!
