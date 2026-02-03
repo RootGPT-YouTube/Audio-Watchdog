@@ -108,6 +108,11 @@ SailfishOS 5.x
 Sony Xperia 10 III (lena)
 
 ## Per una installazione rapida:
+Prima di tutto, installa sudo:
+```bash
+devel-su pkcon install sudo -y
+```
+Poi lancia l'installer:
 ```bash
 curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/heads/main/install.sh | bash
 ```
@@ -227,6 +232,11 @@ SailfishOS 5.x
 Sony Xperia 10 III (lena)
 
 ## For quick installation:
+First of all, install sudo:
+```
+devel-su pkcon install sudo -y
+```
+Then, run the install.sh file:
 ```bash
 curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/heads/main/install.sh | bash
 ```
