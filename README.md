@@ -10,7 +10,7 @@ Il watchdog verifica periodicamente lo stato di PulseAudio e del routing audio, 
 Questa guida descrive **la procedura manuale** per creare il watchdog.
 
 ### 1. Creare lo script `audio-watchdog`
-Installa sudo:
+Installare sudo:
 ```bash
 devel-su pkcon install sudo -y
 ```
