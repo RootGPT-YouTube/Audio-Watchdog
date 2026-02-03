@@ -92,7 +92,7 @@ Ricaricare e attivare i servizi systemd:
 systemctl --user daemon-reload
 systemctl --user enable --now audio-watchdog.timer
 ```
-Log:
+Log:  
 Il watchdog scrive in:
 ```bash
 ~/.local/share/audio-watchdog.log
@@ -218,7 +218,7 @@ Reload and activate systemd services:
 systemctl --user daemon-reload
 systemctl --user enable --now audio-watchdog.timer
 ```
-Log:
+Log:  
 The watchdog writes to:
 ```bash
 ~/.local/share/audio-watchdog.log
