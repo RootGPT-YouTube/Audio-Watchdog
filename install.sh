@@ -5,7 +5,7 @@ echo
 
 # 1. Creazione script watchdog
 echo "[1/4] Creazione dello script /usr/local/bin/audio-watchdog..."
-cat << 'EOF' | devel-su tee /usr/local/bin/audio-watchdog >/dev/null
+cat << 'EOF' | sudo tee /usr/local/bin/audio-watchdog >/dev/null
 #!/bin/bash
 
 LOGFILE="$HOME/.local/share/audio-watchdog.log"
@@ -35,13 +35,13 @@ echo "$DATE - Audio OK." >> $LOGFILE
 exit 0
 EOF
 
-devel-su chmod +x /usr/local/bin/audio-watchdog
+sudo chmod +x /usr/local/bin/audio-watchdog
 echo "✔ Script creato."
 echo
 
 # 2. Creazione directory systemd utente
 echo "[2/4] Creazione directory ~/.config/systemd/user..."
-devel-su mkdir -p ~/.config/systemd/user
+sudo mkdir -p ~/.config/systemd/user
 echo "✔ Directory pronta."
 echo
 
