@@ -1,15 +1,13 @@
 # Audio-Watchdog
 Questo progetto fornisce un watchdog automatico per il sottosistema audio di SailfishOS su Sony Xperia 10 III, utile per mitigare il noto problema dell’audio muto durante le chiamate.
 
-## Audio Watchdog per SailfishOS – Xperia 10 III
+## Audio-Watchdog per SailfishOS (testato su Sony Xperia 10 III)
 
 Questo progetto fornisce un sistema di controllo automatico (“watchdog”) per il sottosistema audio di SailfishOS su **Sony Xperia 10 III**, utile per mitigare il problema dell’audio muto durante le chiamate.
 
 Il watchdog verifica periodicamente lo stato di PulseAudio e del routing audio, e in caso di problemi tenta un ripristino automatico senza riavviare il telefono.
 
-Questa guida descrive **la procedura manuale** per creare il watchdog (punti 1–4).
-
----
+Questa guida descrive **la procedura manuale** per creare il watchdog.
 
 ### 1. Creare lo script `audio-watchdog`
 
