@@ -14,7 +14,7 @@ Questa guida descrive **la procedura manuale** per creare il watchdog.
 Creare il file:
 
 ```bash
-sudo nano /usr/local/bin/audio-watchdog
+devel-su nano /usr/local/bin/audio-watchdog
 ```
 Inserire nel file appena creato:
 ```bash
@@ -48,16 +48,16 @@ exit 0
 ```
 Rendere eseguibile:
 ```bash
-sudo chmod +x /usr/local/bin/audio-watchdog
+devel-su chmod +x /usr/local/bin/audio-watchdog
 ```
 ### 2. Creare la directory dei servizi utente
 ```bash
-mkdir -p ~/.config/systemd/user
+devel-su mkdir -p ~/.config/systemd/user
 ```
 ### 3. Creare il servizio systemd utente
 Creare:
 ```bash
-sudo nano ~/.config/systemd/user/audio-watchdog.service
+devel-su nano ~/.config/systemd/user/audio-watchdog.service
 ```
 Inserire nel file appena creato:
 ```bash
@@ -71,7 +71,7 @@ ExecStart=/usr/local/bin/audio-watchdog
 ### 4. Creare il timer systemd utente
 Creare:
 ```bash
-sudo nano ~/.config/systemd/user/audio-watchdog.timer
+devel-su nano ~/.config/systemd/user/audio-watchdog.timer
 ```
 Inserire nel file appena creato:
 ```bash
@@ -97,7 +97,7 @@ Il watchdog scrive in:
 ```
 Con il comando:
 ```bash
-sudo tail -f ~/.local/share/audio-watchdog.log
+devel-su tail -f ~/.local/share/audio-watchdog.log
 ```
 è possibile verificarne il corretto funzionamento.
 
@@ -130,7 +130,7 @@ This guide describes the manual procedure to create the watchdog.
 ### 1. Create the audio-watchdog script
 Create the file:
 ```bash
-sudo nano /usr/local/bin/audio-watchdog
+devel-su nano /usr/local/bin/audio-watchdog
 ```
 Insert into the newly created file:
 
@@ -165,16 +165,16 @@ exit 0
 ```
 Make it executable:
 ```bash
-sudo chmod +x /usr/local/bin/audio-watchdog
+devel-su chmod +x /usr/local/bin/audio-watchdog
 ```
 ### 2. Create the user service directory
 ```bash
-mkdir -p ~/.config/systemd/user
+devel-su mkdir -p ~/.config/systemd/user
 ```
 ### 3. Create the systemd user service
 Create:
 ```bash
-sudo nano ~/.config/systemd/user/audio-watchdog.service
+devel-su nano ~/.config/systemd/user/audio-watchdog.service
 ```
 Insert into the newly created file:
 ```ini
@@ -214,7 +214,7 @@ The watchdog writes to:
 ```
 You can check its correct operation with:
 ```bash
-sudo tail -f ~/.local/share/audio-watchdog.log
+devel-su tail -f ~/.local/share/audio-watchdog.log
 ```
 ### Compatibility
 SailfishOS 5.x
