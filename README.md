@@ -108,3 +108,13 @@ SailfishOS 5.x
 Sony Xperia 10 III (lena)
 
 # Per una installazione rapida:
+```bash
+curl -sSL https://raw.githubusercontent.com/<tuo-repo>/install.sh | bash
+```
+# Per una sua disinstallazione facilitata:
+```bash
+curl -sSL https://raw.githubusercontent.com/<tuo-repo>/uninstall.sh | bash
+```
+
+### Chi vuole provare questo workaround è il benvenuto e sono graditi feedback.
+# Grazie a tutti!
