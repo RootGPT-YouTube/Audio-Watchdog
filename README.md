@@ -10,11 +10,13 @@ Il watchdog verifica periodicamente lo stato di PulseAudio e del routing audio, 
 Questa guida descrive **la procedura manuale** per creare il watchdog.
 
 ### 1. Creare lo script `audio-watchdog`
-
-Creare il file:
-
+Installa sudo:
 ```bash
-devel-su nano /usr/local/bin/audio-watchdog
+devel-su pkcon install sudo -y
+```
+Creare il file:
+```bash
+sudo nano /usr/local/bin/audio-watchdog
 ```
 Inserire nel file appena creato:
 ```bash
@@ -48,16 +50,16 @@ exit 0
 ```
 Rendere eseguibile:
 ```bash
-devel-su chmod +x /usr/local/bin/audio-watchdog
+sudo chmod +x /usr/local/bin/audio-watchdog
 ```
 ### 2. Creare la directory dei servizi utente
 ```bash
-devel-su mkdir -p ~/.config/systemd/user
+sudo mkdir -p ~/.config/systemd/user
 ```
 ### 3. Creare il servizio systemd utente
 Creare:
 ```bash
-devel-su nano ~/.config/systemd/user/audio-watchdog.service
+sudo nano ~/.config/systemd/user/audio-watchdog.service
 ```
 Inserire nel file appena creato:
 ```bash
@@ -71,7 +73,7 @@ ExecStart=/usr/local/bin/audio-watchdog
 ### 4. Creare il timer systemd utente
 Creare:
 ```bash
-devel-su nano ~/.config/systemd/user/audio-watchdog.timer
+sudo nano ~/.config/systemd/user/audio-watchdog.timer
 ```
 Inserire nel file appena creato:
 ```bash
@@ -97,7 +99,7 @@ Il watchdog scrive in:
 ```
 Con il comando:
 ```bash
-devel-su tail -f ~/.local/share/audio-watchdog.log
+sudo tail -f ~/.local/share/audio-watchdog.log
 ```
 è possibile verificarne il corretto funzionamento.
 
@@ -128,9 +130,13 @@ The watchdog periodically checks the status of PulseAudio and the audio routing,
 This guide describes the manual procedure to create the watchdog.
 
 ### 1. Create the audio-watchdog script
+Install sudo:
+```bash
+devel-su pkcon install sudo -y
+```
 Create the file:
 ```bash
-devel-su nano /usr/local/bin/audio-watchdog
+sudo nano /usr/local/bin/audio-watchdog
 ```
 Insert into the newly created file:
 
@@ -165,16 +171,16 @@ exit 0
 ```
 Make it executable:
 ```bash
-devel-su chmod +x /usr/local/bin/audio-watchdog
+sudo chmod +x /usr/local/bin/audio-watchdog
 ```
 ### 2. Create the user service directory
 ```bash
-devel-su mkdir -p ~/.config/systemd/user
+sudo mkdir -p ~/.config/systemd/user
 ```
 ### 3. Create the systemd user service
 Create:
 ```bash
-devel-su nano ~/.config/systemd/user/audio-watchdog.service
+sudo nano ~/.config/systemd/user/audio-watchdog.service
 ```
 Insert into the newly created file:
 ```ini
@@ -214,7 +220,7 @@ The watchdog writes to:
 ```
 You can check its correct operation with:
 ```bash
-devel-su tail -f ~/.local/share/audio-watchdog.log
+sudo tail -f ~/.local/share/audio-watchdog.log
 ```
 ### Compatibility
 SailfishOS 5.x
