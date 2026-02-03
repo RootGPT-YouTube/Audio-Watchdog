@@ -4,9 +4,6 @@ echo "=== Audio Watchdog Installer per SailfishOS (Xperia 10 III) ==="
 echo
 
 # 1. Creazione script watchdog
-echo "Installazione di sudo..."
-devel-su pkcon install sudo -y
-sleep 2
 echo "[1/4] Creazione dello script /usr/local/bin/audio-watchdog..."
 cat << 'EOF' | sudo tee /usr/local/bin/audio-watchdog >/dev/null
 #!/bin/bash
