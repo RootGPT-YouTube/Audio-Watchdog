@@ -13,23 +13,23 @@ DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
 # Controllo se pulseaudio risponde
 if ! pactl info >/dev/null 2>&1; then
-    echo "$DATE - PulseAudio non risponde, riavvio..." >> $LOGFILE
+    echo "$DATE - PulseAudio not responding, restart..." >> $LOGFILE
     notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "PulseAudio was not responding and has been restarted."
     systemctl --user restart pulseaudio
     sleep 2
     sudo systemctl restart ohmd
-    echo "$DATE - Riavvio completato." >> $LOGFILE
+    echo "$DATE - Restart completed." >> $LOGFILE
     exit 0
 fi
 
 # Controllo se il modulo call-mode è bloccato
 if pactl list | grep -q "State: RUNNING" && pactl list | grep -q "Call Mode"; then
-    echo "$DATE - Call mode bloccato, riavvio audio..." >> $LOGFILE
+    echo "$DATE - Call mode blocked, restart audio..." >> $LOGFILE
     notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "Call-mode was stuck and audio has been restored."
     systemctl --user restart pulseaudio
     sleep 2
     sudo systemctl restart ohmd
-    echo "$DATE - Audio ripristinato." >> $LOGFILE
+    echo "$DATE - Audio restored." >> $LOGFILE
     exit 0
 fi
 
