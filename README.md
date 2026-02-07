@@ -130,8 +130,6 @@ curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/
 ## Known Issue:
 When ohmd is restarted, the volume keys stop working.
 
-This project provides an automatic watchdog for the SailfishOS audio subsystem on the Sony Xperia 10 III, useful for mitigating the well‑known issue of muted audio during phone calls.
-
 ## Audio-Watchdog for SailfishOS (tested on Sony Xperia 10 III)
 This project provides an automatic monitoring system (“watchdog”) for the SailfishOS audio subsystem on the Sony Xperia 10 III, useful for mitigating the issue of muted audio during calls.
 
