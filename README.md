@@ -129,7 +129,10 @@ curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/
 ### Chi vuole provare questo workaround è il benvenuto e sono graditi feedback.
 ## Grazie a tutti!
 
-# [ENGLISH] == Audio-Watchdog ==
+# [ENGLISH]
+# = Audio-Watchdog =
+This project provides an automatic watchdog for the SailfishOS audio subsystem on the Sony Xperia 10 III, useful for mitigating the well‑known issue of muted audio during phone calls.
+
 ## Known Issue:
 When ohmd is restarted, the volume keys stop working.
 
