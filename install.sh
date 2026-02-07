@@ -3,7 +3,7 @@
 echo "=== Audio Watchdog Installer per SailfishOS (Xperia 10 III) ==="
 echo
 
-# 1. Creazione script watchdog
+# 1. Creazione script watchdog.
 echo "[1/4] Creazione dello script /usr/local/bin/audio-watchdog..."
 cat << 'EOF' | sudo tee /usr/local/bin/audio-watchdog >/dev/null
 #!/bin/bash
@@ -11,7 +11,7 @@ cat << 'EOF' | sudo tee /usr/local/bin/audio-watchdog >/dev/null
 LOGFILE="$HOME/.local/share/audio-watchdog.log"
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
-# Controllo se pulseaudio risponde
+# Controllo se pulseaudio risponde.
 if ! pactl info >/dev/null 2>&1; then
     echo "$DATE - PulseAudio not responding, restart..." >> $LOGFILE
     notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "PulseAudio was not responding and has been restarted."
@@ -22,7 +22,7 @@ if ! pactl info >/dev/null 2>&1; then
     exit 0
 fi
 
-# Controllo se il modulo call-mode è bloccato
+# Controllo se il modulo call-mode è bloccato.
 if pactl list | grep -q "State: RUNNING" && pactl list | grep -q "Call Mode"; then
     echo "$DATE - Call mode blocked, restart audio..." >> $LOGFILE
     notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "Call-mode was stuck and audio has been restored."
@@ -41,13 +41,13 @@ sudo chmod +x /usr/local/bin/audio-watchdog
 echo "✔ Script creato."
 echo
 
-# 2. Creazione directory systemd utente
+# 2. Creazione directory systemd utente.
 echo "[2/4] Creazione directory ~/.config/systemd/user..."
 sudo mkdir -p ~/.config/systemd/user
 echo "✔ Directory pronta."
 echo
 
-# 3. Creazione servizio utente
+# 3. Creazione servizio utente.
 echo "[3/4] Creazione audio-watchdog.service..."
 cat << 'EOF' > ~/.config/systemd/user/audio-watchdog.service
 [Unit]
@@ -60,7 +60,7 @@ EOF
 echo "✔ Servizio creato."
 echo
 
-# 4. Creazione timer utente
+# 4. Creazione timer utente.
 echo "[4/4] Creazione audio-watchdog.timer..."
 cat << 'EOF' > ~/.config/systemd/user/audio-watchdog.timer
 [Unit]
@@ -76,7 +76,7 @@ EOF
 echo "✔ Timer creato."
 echo
 
-# Attivazione
+# Attivazione.
 echo "Ricarico systemd utente..."
 systemctl --user daemon-reload
 
