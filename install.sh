@@ -67,7 +67,7 @@ cat << 'EOF' > ~/.config/systemd/user/audio-watchdog.timer
 Description=Timer per audio-watchdog
 
 [Timer]
-OnBootSec=20
+OnBootSec=300
 OnUnitActiveSec=30
 
 [Install]
