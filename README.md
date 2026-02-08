@@ -218,7 +218,7 @@ Insert into the newly created file:
 Description=Timer for audio-watchdog
 
 [Timer]
-OnBootSec=20
+OnBootSec=300
 OnUnitActiveSec=30
 
 [Install]
