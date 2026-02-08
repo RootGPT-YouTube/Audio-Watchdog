@@ -106,7 +106,8 @@ fi
 #############################################
 
 log "Audio OK."
-exit 0```
+exit 0
+```
 Rendere eseguibile:
 ```bash
 sudo chmod +x /usr/local/bin/audio-watchdog
@@ -291,7 +292,8 @@ fi
 #############################################
 
 log "Audio OK."
-exit 0```
+exit 0
+```
 Make it executable:
 ```bash
 sudo chmod +x /usr/local/bin/audio-watchdog
