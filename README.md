@@ -27,33 +27,86 @@ Inserire nel file appena creato:
 #!/bin/bash
 
 LOGFILE="$HOME/.local/share/audio-watchdog.log"
-DATE=$(date "+%Y-%m-%d %H:%M:%S")
+LASTEVENT="$HOME/.local/share/audio-watchdog.last"
 
-# Controllo se pulseaudio risponde
-if ! pactl info >/dev/null 2>&1; then
-    echo "$DATE - PulseAudio is not responding, restarting..." >> $LOGFILE
-    notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "PulseAudio was not responding and has been restarted."
+TITLE="Audio Watchdog"
+MSG_PULSE="PulseAudio was not responding and has been restarted."
+MSG_CALLMODE="Call-mode was stuck and audio has been restored."
+
+# Minimum time between two interventions (seconds)
+RATELIMIT=120
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE"
+}
+
+notify() {
+    # $1 = message
+    dbus-send --session --print-reply \
+      --dest=org.nemo.notifications \
+      /org/nemo/notifications \
+      org.nemo.notifications.NotificationManager.Notify \
+      string:"$TITLE" \
+      string:"$1" \
+      string:"icon-system-notification" \
+      uint32:0 \
+      boolean:true >/dev/null 2>&1
+}
+
+restart_audio() {
+    log "Restarting PulseAudio and ohmd..."
     systemctl --user restart pulseaudio
     sleep 2
     sudo systemctl restart ohmd
-    echo "$DATE - Restart completed." >> $LOGFILE
+    log "Audio restart completed."
+}
+
+#############################################
+# Rate-limit: avoid too frequent restarts
+#############################################
+
+if [ -f "$LASTEVENT" ]; then
+    LASTTIME=$(cat "$LASTEVENT")
+    NOW=$(date +%s)
+    DIFF=$((NOW - LASTTIME))
+
+    if [ "$DIFF" -lt "$RATELIMIT" ]; then
+        log "Rate-limit active: skipping restart."
+        exit 0
+    fi
+fi
+
+#############################################
+# 1. Check if PulseAudio responds
+#############################################
+
+if ! LANG=C pactl info >/dev/null 2>&1; then
+    log "PulseAudio not responding."
+    notify "$MSG_PULSE"
+    date +%s > "$LASTEVENT"
+    restart_audio
     exit 0
 fi
 
-# Controllo se il modulo call-mode è bloccato
-if pactl list | grep -q "State: RUNNING" && pactl list | grep -q "Call Mode"; then
-    echo "$DATE - Call mode blocked, restart audio..." >> $LOGFILE
-    notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "Call-mode was stuck and audio has been restored."
-    systemctl --user restart pulseaudio
-    sleep 2
-    sudo systemctl restart ohmd
-    echo "$DATE - Audio restored." >> $LOGFILE
+#############################################
+# 2. Check if call-mode is stuck
+#############################################
+
+if LANG=C pactl list | grep -q "State: RUNNING" && \
+   LANG=C pactl list | grep -q "Call Mode"; then
+    log "Call-mode stuck."
+    notify "$MSG_CALLMODE"
+    date +%s > "$LASTEVENT"
+    restart_audio
     exit 0
 fi
 
-echo "$DATE - Audio OK." >> $LOGFILE
-exit 0
-```
+#############################################
+# 3. Everything OK
+#############################################
+
+log "Audio OK."
+exit 0```
 Rendere eseguibile:
 ```bash
 sudo chmod +x /usr/local/bin/audio-watchdog
@@ -159,33 +212,86 @@ Insert into the newly created file:
 #!/bin/bash
 
 LOGFILE="$HOME/.local/share/audio-watchdog.log"
-DATE=$(date "+%Y-%m-%d %H:%M:%S")
+LASTEVENT="$HOME/.local/share/audio-watchdog.last"
 
-# Check if PulseAudio is responding
-if ! pactl info >/dev/null 2>&1; then
-    echo "$DATE - PulseAudio not responding, restarting..." >> $LOGFILE
-    notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "PulseAudio was not responding and has been restarted."
+TITLE="Audio Watchdog"
+MSG_PULSE="PulseAudio was not responding and has been restarted."
+MSG_CALLMODE="Call-mode was stuck and audio has been restored."
+
+# Minimum time between two interventions (seconds)
+RATELIMIT=120
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE"
+}
+
+notify() {
+    # $1 = message
+    dbus-send --session --print-reply \
+      --dest=org.nemo.notifications \
+      /org/nemo/notifications \
+      org.nemo.notifications.NotificationManager.Notify \
+      string:"$TITLE" \
+      string:"$1" \
+      string:"icon-system-notification" \
+      uint32:0 \
+      boolean:true >/dev/null 2>&1
+}
+
+restart_audio() {
+    log "Restarting PulseAudio and ohmd..."
     systemctl --user restart pulseaudio
     sleep 2
     sudo systemctl restart ohmd
-    echo "$DATE - Restart completed." >> $LOGFILE
+    log "Audio restart completed."
+}
+
+#############################################
+# Rate-limit: avoid too frequent restarts
+#############################################
+
+if [ -f "$LASTEVENT" ]; then
+    LASTTIME=$(cat "$LASTEVENT")
+    NOW=$(date +%s)
+    DIFF=$((NOW - LASTTIME))
+
+    if [ "$DIFF" -lt "$RATELIMIT" ]; then
+        log "Rate-limit active: skipping restart."
+        exit 0
+    fi
+fi
+
+#############################################
+# 1. Check if PulseAudio responds
+#############################################
+
+if ! LANG=C pactl info >/dev/null 2>&1; then
+    log "PulseAudio not responding."
+    notify "$MSG_PULSE"
+    date +%s > "$LASTEVENT"
+    restart_audio
     exit 0
 fi
 
-# Check if call-mode is stuck
-if pactl list | grep -q "State: RUNNING" && pactl list | grep -q "Call Mode"; then
-    echo "$DATE - Call mode stuck, restarting audio..." >> $LOGFILE
-    notificationtool -o add --summary="audio-watchdog" "Audio Watchdog" "Call-mode was stuck and audio has been restored."
-    systemctl --user restart pulseaudio
-    sleep 2
-    sudo systemctl restart ohmd
-    echo "$DATE - Audio restored." >> $LOGFILE
+#############################################
+# 2. Check if call-mode is stuck
+#############################################
+
+if LANG=C pactl list | grep -q "State: RUNNING" && \
+   LANG=C pactl list | grep -q "Call Mode"; then
+    log "Call-mode stuck."
+    notify "$MSG_CALLMODE"
+    date +%s > "$LASTEVENT"
+    restart_audio
     exit 0
 fi
 
-echo "$DATE - Audio OK." >> $LOGFILE
-exit 0
-```
+#############################################
+# 3. Everything OK
+#############################################
+
+log "Audio OK."
+exit 0```
 Make it executable:
 ```bash
 sudo chmod +x /usr/local/bin/audio-watchdog
