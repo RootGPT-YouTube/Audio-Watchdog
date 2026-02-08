@@ -3,7 +3,7 @@
 Questo progetto fornisce un watchdog automatico per il sottosistema audio di SailfishOS su Sony Xperia 10 III, utile per mitigare il noto problema dell’audio muto durante le chiamate.
 
 ## Known Issue:
-Quando si riavvia ohms i tasti volume smettono di funzionare.
+Quando si riavvia ohms i tasti volume smettono di funzionare. Per farli tornare a funzionare è necessario un riavvio (finché non capirò quale comando li abilita).
 ## Audio-Watchdog per SailfishOS (testato su Sony Xperia 10 III)
 
 Questo progetto fornisce un sistema di controllo automatico (“watchdog”) per il sottosistema audio di SailfishOS su **Sony Xperia 10 III**, utile per mitigare il problema dell’audio muto durante le chiamate.
@@ -134,7 +134,7 @@ curl -sSL https://raw.githubusercontent.com/RootGPT-YouTube/Audio-Watchdog/refs/
 This project provides an automatic watchdog for the SailfishOS audio subsystem on the Sony Xperia 10 III, useful for mitigating the well‑known issue of muted audio during phone calls.
 
 ## Known Issue:
-When ohmd is restarted, the volume keys stop working.
+When ohmd is restarted, the volume keys stop working. To get them working again, a reboot is required (until I figure out which command re‑enables them).
 
 ## Audio-Watchdog for SailfishOS (tested on Sony Xperia 10 III)
 This project provides an automatic monitoring system (“watchdog”) for the SailfishOS audio subsystem on the Sony Xperia 10 III, useful for mitigating the issue of muted audio during calls.
